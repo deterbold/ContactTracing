@@ -8,22 +8,22 @@
 
 /* Begin PBXBuildFile section */
 		4943B7D3245717B0005C444F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4943B7D2245717B0005C444F /* AppDelegate.swift */; };
-		4943B7D5245717B0005C444F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4943B7D4245717B0005C444F /* SceneDelegate.swift */; };
 		4943B7D7245717B0005C444F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4943B7D6245717B0005C444F /* ViewController.swift */; };
 		4943B7DA245717B0005C444F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4943B7D8245717B0005C444F /* Main.storyboard */; };
 		4943B7DC245717B4005C444F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4943B7DB245717B4005C444F /* Assets.xcassets */; };
 		4943B7DF245717B4005C444F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4943B7DD245717B4005C444F /* LaunchScreen.storyboard */; };
+		4943B7E82458063F005C444F /* UserDefaultsExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4943B7E72458063F005C444F /* UserDefaultsExt.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		4943B7CF245717B0005C444F /* ContactTracing.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ContactTracing.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4943B7D2245717B0005C444F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		4943B7D4245717B0005C444F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		4943B7D6245717B0005C444F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		4943B7D9245717B0005C444F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		4943B7DB245717B4005C444F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4943B7DE245717B4005C444F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4943B7E0245717B4005C444F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4943B7E72458063F005C444F /* UserDefaultsExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsExt.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,8 +56,8 @@
 		4943B7D1245717B0005C444F /* ContactTracing */ = {
 			isa = PBXGroup;
 			children = (
+				4943B7E624580626005C444F /* Extensions */,
 				4943B7D2245717B0005C444F /* AppDelegate.swift */,
-				4943B7D4245717B0005C444F /* SceneDelegate.swift */,
 				4943B7D6245717B0005C444F /* ViewController.swift */,
 				4943B7D8245717B0005C444F /* Main.storyboard */,
 				4943B7DB245717B4005C444F /* Assets.xcassets */,
@@ -65,6 +65,14 @@
 				4943B7E0245717B4005C444F /* Info.plist */,
 			);
 			path = ContactTracing;
+			sourceTree = "<group>";
+		};
+		4943B7E624580626005C444F /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				4943B7E72458063F005C444F /* UserDefaultsExt.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -138,9 +146,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4943B7E82458063F005C444F /* UserDefaultsExt.swift in Sources */,
 				4943B7D7245717B0005C444F /* ViewController.swift in Sources */,
 				4943B7D3245717B0005C444F /* AppDelegate.swift in Sources */,
-				4943B7D5245717B0005C444F /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
