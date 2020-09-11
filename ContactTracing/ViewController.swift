@@ -11,6 +11,7 @@ import CoreLocation
 import CoreBluetooth
 import Pulsator
 import UserNotifications
+import AVFoundation
 
 class ViewController: UIViewController, CBPeripheralManagerDelegate, CLLocationManagerDelegate
 {
@@ -47,8 +48,11 @@ class ViewController: UIViewController, CBPeripheralManagerDelegate, CLLocationM
     //MARK: - VARIABLES
     var debug:Bool!
     
-    //MARK: USER DEFAULTS
+    //MARK: - USER DEFAULTS
     let defaults = UserDefaults.standard
+    
+    //MARK: - SOUND VARIABLES
+    var theScream: AVAudioPlayer?
     
 //    override func viewDidAppear(_ animated: Bool)
 //    {
@@ -134,7 +138,6 @@ class ViewController: UIViewController, CBPeripheralManagerDelegate, CLLocationM
         distanceLabel.text = ""
         self.view.addSubview(distanceLabel)
         distanceLabel.isHidden = true
-        
         
         //MARK: BEACON TRACKING INITS
         //we initialize the location manager
@@ -321,6 +324,8 @@ class ViewController: UIViewController, CBPeripheralManagerDelegate, CLLocationM
             self.pulsator.radius = 600
             self.pulsator.pulseInterval = 3
             print("Interval: ", self.pulsator.numPulse)
+            //sound
+            theScream?.stop()
             
         case .far:
             print("Far Distance")
@@ -331,6 +336,9 @@ class ViewController: UIViewController, CBPeripheralManagerDelegate, CLLocationM
             self.pulsator.animationDuration = 3
             self.pulsator.numPulse = 4
             self.pulsator.radius = 450
+            //sound
+            theScream?.stop()
+            
         case .near:
             print("Near Distance")
             distanceLabel.text = "Near Distance"
@@ -340,6 +348,9 @@ class ViewController: UIViewController, CBPeripheralManagerDelegate, CLLocationM
             self.pulsator.animationDuration = 4
             self.pulsator.numPulse = 5
             self.pulsator.radius = 200
+            //sound
+            theScream?.stop()
+            
         case .immediate:
             print("Immediate Distance")
             distanceLabel.text = "Immediate Distance"
@@ -350,9 +361,20 @@ class ViewController: UIViewController, CBPeripheralManagerDelegate, CLLocationM
             self.pulsator.radius = 200
             self.pulsator.pulseInterval = 0
             self.pulsator.numPulse = 8
+            //MARK: - Screaming when close by
+            let path = Bundle.main.path(forResource: "theScream.mp3", ofType: nil)!
+            let url = URL(fileURLWithPath: path)
+            do
+            {
+                theScream = try AVAudioPlayer(contentsOf: url)
+                theScream?.play()
+            }
+            catch
+            {
+                print("could not load file")
+            }
+                   
             print("Interval: ", self.pulsator.numPulse)
-            
-            
             
         default:
             break
