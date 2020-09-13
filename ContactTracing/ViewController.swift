@@ -12,6 +12,7 @@ import CoreBluetooth
 import Pulsator
 import UserNotifications
 import AVFoundation
+import CoreHaptics
 
 class ViewController: UIViewController, CBPeripheralManagerDelegate, CLLocationManagerDelegate
 {
@@ -53,6 +54,10 @@ class ViewController: UIViewController, CBPeripheralManagerDelegate, CLLocationM
     
     //MARK: - SOUND VARIABLES
     var theScream: AVAudioPlayer?
+    
+    //MARK: - HAPTICS VARIABLES
+    var hapticsAvailable: Bool { CHHapticEngine.capabilitiesForHardware().supportsHaptics}
+    var hapticEngine: CHHapticEngine?
     
 //    override func viewDidAppear(_ animated: Bool)
 //    {
@@ -139,6 +144,18 @@ class ViewController: UIViewController, CBPeripheralManagerDelegate, CLLocationM
         self.view.addSubview(distanceLabel)
         distanceLabel.isHidden = true
         
+        //MARK: HAPTINGS ENGINE INIT
+        if hapticsAvailable
+        {
+            do
+            {
+                hapticEngine = try CHHapticEngine()
+                try hapticEngine?.start()
+            } catch {
+                print("there was an error creating the haptics engine: \(error.localizedDescription)")
+            }
+        }
+        
         //MARK: BEACON TRACKING INITS
         //we initialize the location manager
         //the delegate is the self (ah, programming)
@@ -191,6 +208,7 @@ class ViewController: UIViewController, CBPeripheralManagerDelegate, CLLocationM
         {
             stopLocalBeacon()
         }
+        startButton.backgroundColor = .red
         let localBeaconUUID = "5A4BCFCE-174E-4BAC-A814-092E77F6B7E5"
         let uuid = UUID(uuidString: localBeaconUUID)
         localBeacon = CLBeaconRegion(proximityUUID:uuid!, major: 123, minor: 456, identifier: beaconIdentifier)
@@ -204,6 +222,7 @@ class ViewController: UIViewController, CBPeripheralManagerDelegate, CLLocationM
     @objc func stopLocalBeacon()
     {
         print("Beacon stopped")
+        startButton.backgroundColor = .darkGray
         if localBeacon != nil
         {
             if peripheralManager != nil
@@ -367,11 +386,38 @@ class ViewController: UIViewController, CBPeripheralManagerDelegate, CLLocationM
             do
             {
                 theScream = try AVAudioPlayer(contentsOf: url)
+                try AVAudioSession.sharedInstance().setCategory(.playback)
                 theScream?.play()
             }
             catch
             {
                 print("could not load file")
+            }
+            //MARK: - Going crazy on vibrations
+            if hapticsAvailable
+            {
+                var events = [CHHapticEvent]()
+                for i in stride(from: 0, to: 1, by: 0.1)
+                {
+                    let intensity = CHHapticEventParameter(parameterID: .hapticIntensity, value: Float(1 - i))
+                    let sharpness = CHHapticEventParameter(parameterID: .hapticSharpness, value: Float(1 - i))
+                    let event = CHHapticEvent(eventType: .hapticTransient, parameters: [intensity, sharpness], relativeTime: i)
+                    events.append(event)
+                }
+                do
+                {
+                    let patter = try CHHapticPattern(events: events, parameters:  [])
+                    let player = try hapticEngine?.makePlayer(with: patter)
+                    try player?.start(atTime: 0)
+                }
+                catch
+                {
+                    print("failed to play pattern: \(error.localizedDescription).")
+                }
+            }
+            else
+            {
+                UIDevice.vibrate()
             }
                    
             print("Interval: ", self.pulsator.numPulse)
