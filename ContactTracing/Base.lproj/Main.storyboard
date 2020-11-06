@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Bsd-i5-hnv">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -9,10 +9,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Introduction Controller-->
         <scene sceneID="Ujc-2h-PG7">
             <objects>
-                <viewController storyboardIdentifier="introduction" id="Bsd-i5-hnv" sceneMemberID="viewController">
+                <viewController restorationIdentifier="introduction" storyboardIdentifier="introduction" id="Bsd-i5-hnv" customClass="introductionController" customModule="ContactTracing" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="HiD-aw-wAg">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -24,10 +24,10 @@
             </objects>
             <point key="canvasLocation" x="-1114" y="84"/>
         </scene>
-        <!--View Controller-->
+        <!--Instructions Controller-->
         <scene sceneID="KA8-5Q-8QZ">
             <objects>
-                <viewController storyboardIdentifier="instructions" id="7BS-sw-oeE" sceneMemberID="viewController">
+                <viewController restorationIdentifier="instructionsController" storyboardIdentifier="instructionsController" id="7BS-sw-oeE" customClass="instructionsController" customModule="ContactTracing" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Agi-BR-Il8">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -42,7 +42,7 @@
         <!--Social Distance Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="socialDistanceController" customModule="ContactTracing" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController restorationIdentifier="socialDistanceController" storyboardIdentifier="socialDistanceController" id="BYZ-38-t0r" customClass="socialDistanceController" customModule="ContactTracing" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

@@ -31,13 +31,15 @@ class socialDistanceController: UIViewController, CBPeripheralManagerDelegate, C
     //MARK: INTERFACE
     var startButton: UIButton!
     var stopButton: UIButton!
+    var instructionsButton: UIButton!
     var labelUUID: UILabel!
     var majorLabel: UILabel!
     var minorLabel: UILabel!
     var distanceLabel: UILabel!
     var debugSwitch: UISwitch!
     
-    var pulsator = Pulsator()
+    var pulsator : Pulsator? = nil
+    
     var pulseView: UIImageView!
     var pulseColor: CGColor!
     var pulseRadius: CGFloat!
@@ -61,27 +63,55 @@ class socialDistanceController: UIViewController, CBPeripheralManagerDelegate, C
     var hapticsAvailable: Bool { CHHapticEngine.capabilitiesForHardware().supportsHaptics}
     var hapticEngine: CHHapticEngine?
     
-//    override func viewDidAppear(_ animated: Bool)
-//    {
-//        if #available(iOS 12.0, *) {
-//            if self.traitCollection.userInterfaceStyle == .dark
-//            {
-//                self.view.backgroundColor = .black
-//
-//            }
-//            else if self.traitCollection.userInterfaceStyle == .light
-//            {
-//                self.view.backgroundColor = .white
-//            }
-//        } else {
-//            self.view.backgroundColor = .black
-//        }
-//    }
-
+    //MARK: - VIEW DID APPEAR
+    
+    override func viewDidAppear(_ animated: Bool)
+    {
+        
+        //MARK: PULSE
+        pulseView = UIImageView(frame: CGRect(x: view.frame.midX, y: view.frame.midY, width: 1, height: 1))
+        pulseView.backgroundColor = .black
+        view.addSubview(pulseView)
+        
+        pulsator = Pulsator()
+       
+        pulseColor = CGColor(srgbRed: 0, green: 0.46, blue: 0.76, alpha: 1)
+        pulseRadius = 600.0
+        pulseRep = 6
+        pulseAnimDuration = 6.0
+        pulsator!.backgroundColor = pulseColor
+        pulsator!.radius = pulseRadius
+        pulsator!.numPulse = pulseRep
+        pulsator!.animationDuration = pulseAnimDuration
+        pulseView.layer.addSublayer(pulsator!)
+        pulsator!.start()
+    }
+ 
+    //MARK: - VIEW DID LOAD
+    
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        view.backgroundColor = .black
         debug = false
+//
+//        //MARK: PULSE
+//        pulseView = UIImageView(frame: CGRect(x: view.frame.midX, y: view.frame.midY, width: 1, height: 1))
+//        pulseView.backgroundColor = .black
+//        view.addSubview(pulseView)
+//
+//        pulsator = Pulsator()
+//
+//        pulseColor = CGColor(srgbRed: 0, green: 0.46, blue: 0.76, alpha: 1)
+//        pulseRadius = 600.0
+//        pulseRep = 6
+//        pulseAnimDuration = 6.0
+//        pulsator!.backgroundColor = pulseColor
+//        pulsator!.radius = pulseRadius
+//        pulsator!.numPulse = pulseRep
+//        pulsator!.animationDuration = pulseAnimDuration
+//        pulseView.layer.addSublayer(pulsator!)
+//        pulsator!.start()
         
         //MARK: SWITCH
         debugSwitch = UISwitch(frame: CGRect(x: self.view.frame.midX - 25, y: 100, width: 50, height: 50))
@@ -89,21 +119,6 @@ class socialDistanceController: UIViewController, CBPeripheralManagerDelegate, C
         debugSwitch.setOn(false, animated: false)
         self.view.addSubview(debugSwitch)
 
-        
-        //MARK: PULSE
-        pulseColor = CGColor(srgbRed: 0, green: 0.46, blue: 0.76, alpha: 1)
-        pulseRadius = 600.0
-        pulseRep = 6
-        pulseAnimDuration = 6.0
-        pulsator.backgroundColor = pulseColor
-        pulsator.radius = pulseRadius
-        pulsator.numPulse = pulseRep
-        pulsator.animationDuration = pulseAnimDuration
-        pulseView = UIImageView(frame: CGRect(x: view.frame.midX, y: view.frame.midY, width: 1, height: 1))
-        pulseView.backgroundColor = view.backgroundColor
-        view.addSubview(pulseView)
-        pulseView.layer.addSublayer(pulsator)
-        pulsator.start()
         
         
         //MARK: PROXIMITY LABEL
@@ -136,8 +151,18 @@ class socialDistanceController: UIViewController, CBPeripheralManagerDelegate, C
         self.view.addSubview(stopButton)
         stopButton.isHidden = true
         
+        instructionsButton = UIButton(frame: CGRect(x: self.view.frame.midX - 100, y: self.view.frame.height - 200, width: 200, height: 100))
+        instructionsButton.backgroundColor = .clear
+        instructionsButton.setTitleColor(.systemBlue, for: .normal)
+        instructionsButton.layer.cornerRadius = 14
+        instructionsButton.setTitle("INSTRUCTIONS", for: .normal)
+        instructionsButton.addTarget(self, action: #selector(toInstructions), for: .touchUpInside)
+        instructionsButton.titleLabel?.adjustsFontSizeToFitWidth = true
+        self.view.addSubview(instructionsButton)
+
+        
         //MARK: LABELS
-        distanceLabel = UILabel(frame: CGRect(x: view.frame.midX - 100, y: view.frame.midY + 100, width: 200, height: 100))
+        distanceLabel = UILabel(frame: CGRect(x: self.view.frame.midX - 100, y: self.view.frame.height - 200, width: 200, height: 100))
         distanceLabel.adjustsFontSizeToFitWidth = true
         distanceLabel.textColor = .white
         distanceLabel.textAlignment = .center
@@ -182,6 +207,17 @@ class socialDistanceController: UIViewController, CBPeripheralManagerDelegate, C
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    @objc func toInstructions()
+    {
+        self.pulsator?.stop()
+        
+        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+        let sd = storyBoard.instantiateViewController(withIdentifier: "instructionsController")
+        sd.modalPresentationStyle = .overFullScreen
+        self.present(sd, animated: true, completion: nil)
+    }
+    
     
     @objc func debugF(_ sender:UISwitch)
     {
@@ -345,12 +381,12 @@ class socialDistanceController: UIViewController, CBPeripheralManagerDelegate, C
             distanceLabel.text = "Unknown Distance"
             proximityLabel.text = "Nothing around you"
             proximityLabel.layer.removeAllAnimations()
-            self.pulsator.backgroundColor = pulseColor
-            self.pulsator.animationDuration = 2
-            self.pulsator.numPulse = 3
-            self.pulsator.radius = 600
-            self.pulsator.pulseInterval = 3
-            print("Interval: ", self.pulsator.numPulse)
+            self.pulsator!.backgroundColor = pulseColor
+            self.pulsator!.animationDuration = 2
+            self.pulsator!.numPulse = 3
+            self.pulsator!.radius = 600
+            self.pulsator!.pulseInterval = 3
+            print("Interval: ", self.pulsator!.numPulse)
             //sound
             theScream?.stop()
             
@@ -359,10 +395,10 @@ class socialDistanceController: UIViewController, CBPeripheralManagerDelegate, C
             distanceLabel.text = "Far Distance"
             proximityLabel.text = "Something is out there"
             proximityLabel.blink(duration: 1)
-            self.pulsator.backgroundColor = CGColor(srgbRed: 255, green: 255, blue: 0, alpha: 1)
-            self.pulsator.animationDuration = 3
-            self.pulsator.numPulse = 4
-            self.pulsator.radius = 450
+            self.pulsator!.backgroundColor = CGColor(srgbRed: 255, green: 255, blue: 0, alpha: 1)
+            self.pulsator!.animationDuration = 3
+            self.pulsator!.numPulse = 4
+            self.pulsator!.radius = 450
             //sound
             theScream?.stop()
             
@@ -371,10 +407,10 @@ class socialDistanceController: UIViewController, CBPeripheralManagerDelegate, C
             distanceLabel.text = "Near Distance"
             proximityLabel.text = "Something is close to you"
             proximityLabel.blink(duration: 0.9)
-            self.pulsator.backgroundColor = CGColor(srgbRed: 255, green: 165, blue: 0, alpha: 1)
-            self.pulsator.animationDuration = 4
-            self.pulsator.numPulse = 5
-            self.pulsator.radius = 200
+            self.pulsator!.backgroundColor = CGColor(srgbRed: 255, green: 165, blue: 0, alpha: 1)
+            self.pulsator!.animationDuration = 4
+            self.pulsator!.numPulse = 5
+            self.pulsator!.radius = 200
             //sound
             theScream?.stop()
             
@@ -383,11 +419,11 @@ class socialDistanceController: UIViewController, CBPeripheralManagerDelegate, C
             distanceLabel.text = "Immediate Distance"
             proximityLabel.text = "Something is next to you"
             proximityLabel.blink(duration: 0.4)
-            self.pulsator.backgroundColor = CGColor(srgbRed: 255, green: 0, blue: 0, alpha: 1)
-            self.pulsator.animationDuration = 6
-            self.pulsator.radius = 200
-            self.pulsator.pulseInterval = 0
-            self.pulsator.numPulse = 8
+            self.pulsator!.backgroundColor = CGColor(srgbRed: 255, green: 0, blue: 0, alpha: 1)
+            self.pulsator!.animationDuration = 6
+            self.pulsator!.radius = 200
+            self.pulsator!.pulseInterval = 0
+            self.pulsator!.numPulse = 8
             //MARK: - Screaming when close by
             let path = Bundle.main.path(forResource: "theScream.mp3", ofType: nil)!
             let url = URL(fileURLWithPath: path)
@@ -428,7 +464,7 @@ class socialDistanceController: UIViewController, CBPeripheralManagerDelegate, C
                 UIDevice.vibrate()
             }
                    
-            print("Interval: ", self.pulsator.numPulse)
+            print("Interval: ", self.pulsator!.numPulse)
             
         default:
             break

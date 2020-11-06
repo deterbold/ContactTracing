@@ -24,4 +24,23 @@ extension UILabel
         self.alpha = 0.0
         self.layer.removeAllAnimations()
     }
+    
+    func personalLabel()
+    {
+        print("here")
+        textColor = .white
+//        if traitCollection.userInterfaceStyle == .light
+//        {
+//            textColor = .black
+//        }
+//        else if traitCollection.userInterfaceStyle == .dark
+//        {
+//            textColor = .white
+//        }
+        adjustsFontSizeToFitWidth = true
+        textAlignment = .center
+        backgroundColor = .clear
+        numberOfLines = 0
+        
+    }
 }

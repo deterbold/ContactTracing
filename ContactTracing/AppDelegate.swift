@@ -14,12 +14,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
 
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
-        // Request permission to send notifications
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool
+    {
+        window = UIWindow()
+        window?.makeKeyAndVisible()
+        let controller = introductionController()
+        window?.rootViewController = controller
+//        return true
+//        // Override point for customization after application launch.
+//        // Request permission to send notifications
         let center = UNUserNotificationCenter.current()
         center.requestAuthorization(options:[.alert, .sound]) { (granted, error) in }
         return true
+       
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
