@@ -7,11 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		42787E8B25554E010087ECB5 /* introductionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42787E8A25554E010087ECB5 /* introductionController.swift */; };
+		42787E9025554E210087ECB5 /* instructionsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42787E8F25554E210087ECB5 /* instructionsController.swift */; };
+		42787E952555665D0087ECB5 /* MyLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42787E942555665D0087ECB5 /* MyLabel.swift */; };
 		42B6B18B250B5A4500B95512 /* theScream.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 42B6B18A250B5A4500B95512 /* theScream.mp3 */; };
 		42B6B18D250E7B9700B95512 /* UIDeviceVibration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B6B18C250E7B9700B95512 /* UIDeviceVibration.swift */; };
 		490AC25E245F1CBB00A68DEF /* blinkingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 490AC25D245F1CBB00A68DEF /* blinkingLabel.swift */; };
 		4943B7D3245717B0005C444F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4943B7D2245717B0005C444F /* AppDelegate.swift */; };
-		4943B7D7245717B0005C444F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4943B7D6245717B0005C444F /* ViewController.swift */; };
+		4943B7D7245717B0005C444F /* socialDistanceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4943B7D6245717B0005C444F /* socialDistanceController.swift */; };
 		4943B7DA245717B0005C444F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4943B7D8245717B0005C444F /* Main.storyboard */; };
 		4943B7DC245717B4005C444F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4943B7DB245717B4005C444F /* Assets.xcassets */; };
 		4943B7DF245717B4005C444F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4943B7DD245717B4005C444F /* LaunchScreen.storyboard */; };
@@ -22,12 +25,15 @@
 /* Begin PBXFileReference section */
 		079EE96AD160499A015CFF73 /* Pods_ContactTracing.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ContactTracing.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DC366220259D8A197586574 /* Pods-ContactTracing.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ContactTracing.debug.xcconfig"; path = "Target Support Files/Pods-ContactTracing/Pods-ContactTracing.debug.xcconfig"; sourceTree = "<group>"; };
+		42787E8A25554E010087ECB5 /* introductionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = introductionController.swift; sourceTree = "<group>"; };
+		42787E8F25554E210087ECB5 /* instructionsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = instructionsController.swift; sourceTree = "<group>"; };
+		42787E942555665D0087ECB5 /* MyLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyLabel.swift; sourceTree = "<group>"; };
 		42B6B18A250B5A4500B95512 /* theScream.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = theScream.mp3; sourceTree = "<group>"; };
 		42B6B18C250E7B9700B95512 /* UIDeviceVibration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIDeviceVibration.swift; sourceTree = "<group>"; };
 		490AC25D245F1CBB00A68DEF /* blinkingLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = blinkingLabel.swift; sourceTree = "<group>"; };
 		4943B7CF245717B0005C444F /* ContactTracing.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ContactTracing.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4943B7D2245717B0005C444F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		4943B7D6245717B0005C444F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		4943B7D6245717B0005C444F /* socialDistanceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = socialDistanceController.swift; sourceTree = "<group>"; };
 		4943B7D9245717B0005C444F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		4943B7DB245717B4005C444F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4943B7DE245717B4005C444F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -48,6 +54,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		42787E93255566460087ECB5 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				42787E942555665D0087ECB5 /* MyLabel.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
 		4943B7C6245717B0005C444F = {
 			isa = PBXGroup;
 			children = (
@@ -69,14 +83,17 @@
 		4943B7D1245717B0005C444F /* ContactTracing */ = {
 			isa = PBXGroup;
 			children = (
+				42787E93255566460087ECB5 /* Helpers */,
 				42B6B18A250B5A4500B95512 /* theScream.mp3 */,
-				4943B7E624580626005C444F /* Extensions */,
 				4943B7D2245717B0005C444F /* AppDelegate.swift */,
-				4943B7D6245717B0005C444F /* ViewController.swift */,
+				4943B7E624580626005C444F /* Extensions */,
+				42787E8A25554E010087ECB5 /* introductionController.swift */,
+				4943B7D6245717B0005C444F /* socialDistanceController.swift */,
 				4943B7D8245717B0005C444F /* Main.storyboard */,
 				4943B7DB245717B4005C444F /* Assets.xcassets */,
 				4943B7DD245717B4005C444F /* LaunchScreen.storyboard */,
 				4943B7E0245717B4005C444F /* Info.plist */,
+				42787E8F25554E210087ECB5 /* instructionsController.swift */,
 			);
 			path = ContactTracing;
 			sourceTree = "<group>";
@@ -137,7 +154,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1140;
-				LastUpgradeCheck = 1140;
+				LastUpgradeCheck = 1210;
 				ORGANIZATIONNAME = playable_systems;
 				TargetAttributes = {
 					4943B7CE245717B0005C444F = {
@@ -227,7 +244,10 @@
 				490AC25E245F1CBB00A68DEF /* blinkingLabel.swift in Sources */,
 				4943B7E82458063F005C444F /* UserDefaultsExt.swift in Sources */,
 				42B6B18D250E7B9700B95512 /* UIDeviceVibration.swift in Sources */,
-				4943B7D7245717B0005C444F /* ViewController.swift in Sources */,
+				42787E8B25554E010087ECB5 /* introductionController.swift in Sources */,
+				42787E9025554E210087ECB5 /* instructionsController.swift in Sources */,
+				4943B7D7245717B0005C444F /* socialDistanceController.swift in Sources */,
+				42787E952555665D0087ECB5 /* MyLabel.swift in Sources */,
 				4943B7D3245717B0005C444F /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -280,6 +300,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -340,6 +361,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;

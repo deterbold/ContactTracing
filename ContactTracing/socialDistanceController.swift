@@ -14,7 +14,7 @@ import UserNotifications
 import AVFoundation
 import CoreHaptics
 
-class ViewController: UIViewController, CBPeripheralManagerDelegate, CLLocationManagerDelegate
+class socialDistanceController: UIViewController, CBPeripheralManagerDelegate, CLLocationManagerDelegate
 {
     
     //MARK: BEACON CREATION VARIABLES
@@ -53,6 +53,8 @@ class ViewController: UIViewController, CBPeripheralManagerDelegate, CLLocationM
     let defaults = UserDefaults.standard
     
     //MARK: - SOUND VARIABLES
+    //https://stackoverflow.com/questions/32036146/how-to-play-a-sound-using-swift
+    //https://stackoverflow.com/questions/35289918/play-audio-when-device-in-silent-mode-ios-swift
     var theScream: AVAudioPlayer?
     
     //MARK: - HAPTICS VARIABLES
@@ -147,6 +149,7 @@ class ViewController: UIViewController, CBPeripheralManagerDelegate, CLLocationM
         //MARK: HAPTINGS ENGINE INIT
         if hapticsAvailable
         {
+            print ("haptics available")
             do
             {
                 hapticEngine = try CHHapticEngine()
@@ -211,7 +214,8 @@ class ViewController: UIViewController, CBPeripheralManagerDelegate, CLLocationM
         startButton.backgroundColor = .red
         let localBeaconUUID = "5A4BCFCE-174E-4BAC-A814-092E77F6B7E5"
         let uuid = UUID(uuidString: localBeaconUUID)
-        localBeacon = CLBeaconRegion(proximityUUID:uuid!, major: 123, minor: 456, identifier: beaconIdentifier)
+        //localBeacon = CLBeaconRegion(proximityUUID:uuid!, major: 123, minor: 456, identifier: beaconIdentifier)
+        localBeacon = CLBeaconRegion(uuid: uuid!, major: 123, minor: 456, identifier: beaconIdentifier)
         localBeacon.notifyOnEntry = true
         localBeacon.notifyOnExit = true
         beaconPeripheralData = localBeacon.peripheralData(withMeasuredPower: nil)
@@ -312,14 +316,18 @@ class ViewController: UIViewController, CBPeripheralManagerDelegate, CLLocationM
         //this is the beacon UUID
         
        let localBeaconUUID = "5A4BCFCE-174E-4BAC-A814-092E77F6B7E5"
-              let uuid = UUID(uuidString: localBeaconUUID)
-              localBeacon = CLBeaconRegion(proximityUUID:uuid!, major: 123, minor: 456, identifier: beaconIdentifier)
+        let uuid = UUID(uuidString: localBeaconUUID)
+        //localBeacon = CLBeaconRegion(proximityUUID:uuid!, major: 123, minor: 456, identifier: beaconIdentifier)
+        localBeacon = CLBeaconRegion(uuid: uuid!, major: 123, minor: 456, identifier: beaconIdentifier)
         
         //looking for beacons
         locationManager.startMonitoring(for: localBeacon)
         
         //and trying to figure out how far away they are
+        let beaconConstraint = CLBeaconIdentityConstraint(uuid: uuid!, major: 123, minor: 456)
         locationManager.startRangingBeacons(in: localBeacon)
+        locationManager.startRangingBeacons(satisfying: beaconConstraint)
+        locationManager.startMonitoring(for: localBeacon)
     }
     
     
